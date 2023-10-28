@@ -6,7 +6,10 @@ channel = connection.channel()
 #declare a queue
 channel.queue_declare(queue= queue1 )   
 try:
-    channel.basic_publish(exchange='', routing_key='queue1', body='Hello World!')
+    while True:
+        message = input("Enter message: ")
+        channel.basic_publish(exchange='', routing_key='queue1', body=message)
+        print("message sent ..")
 except keyboardInterrupt:
     pass
     connection.close()
