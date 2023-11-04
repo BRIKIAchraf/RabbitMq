@@ -1,15 +1,4 @@
-from connection import connection
-
-queue1 = 'queue1'
-#create a channel
+from connexion import connection
+queue_name = ["achraf", "achraf2"]
 channel = connection.channel()
-#declare a queue
-channel.queue_declare(queue= queue1 )   
-try:
-    while True:
-        message = input("Enter message: ")
-        channel.basic_publish(exchange='', routing_key='queue1', body=message)
-        print("message sent ..")
-except keyboardInterrupt:
-    pass
-    connection.close()
+channel.exchange_declare

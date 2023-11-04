@@ -1,12 +1,15 @@
 from connection import connection
-queue1 = 'queue1'
-channel = connection.channel()
-channel.queue_declare(queue='queue1')
 
+my_queue = "achraf"
+#create channel 
+channel = connection.channel()
+channel.queue_declare(my_queue)
 def callback_func(ch, method, properties, body):
-    print (f"received -> {body}")
-    #logic goes here 
-    channel.basic_ack(delivery_tag=method.delivery_tag)
+    print(f"received -> {body}")
+try :
+    channel.basic_consume(queue=my_queue, on_message_callback=callback_func, auto_ack=True)
+    channel.start_consuming()
+except KeyboardInterrupt:
+    pass
+    connection.close()
     
-channel.basic_consume(queue='queue1', on_message_callback=callback_func, auto_ack=True)
-channel.start_consuming()
