@@ -1,6 +1,6 @@
 from connection import connection
 
-my_queue = "achraf"
+my_queue = "csharp"
 #create channel 
 channel = connection.channel()
 channel.queue_declare(my_queue)
